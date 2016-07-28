@@ -4,21 +4,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import android.app.AlertDialog.Builder;
-import java.util.Scanner;
-import java.lang.Object;
-
-
-public class Baccara extends AppCompatActivity {
-
-    int capital, bet, base, win =0;
-    boolean result = false;
+public class Baccara extends AppCompatActivity{
+    private int capital, bet, base, win =0;
+    private boolean result = false;
     //String inputMoney=null;
-
-    //문자 입력 받을 스캐너
-    Scanner scanner = new Scanner(System.in);
+    CapitalMessageBox1 cmb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +36,10 @@ public class Baccara extends AppCompatActivity {
 
     //초기 Capital 입력받기
     protected void inPutCapital(){
-        capital = scanner.nextInt();
+        cmb = new CapitalMessageBox1();
+        cmb.capitalMessageBox();
         base = capital/500;
         bet = base;
-        displayTextCapital(capital);
-        displayTextWinnings(0);
     }
 
     //Display Capital
@@ -61,31 +54,11 @@ public class Baccara extends AppCompatActivity {
         winningsView.setText(String.valueOf(winnings));
     }
 
-
-    public class messageBox {
-        AlertDialog.Builder alert_confirm = new AlertDialog.Builder(Baccara.this);
-        alert_confirm.setMessage("프로그램을 종료 하시겠습니까?").setCancelable(false).setPositiveButton("확인",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // 'YES'
-            }
-        }).setNegativeButton("취소",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // 'No'
-                return;
-            }
-        });
-        AlertDialog alert = alert_confirm.create();
-        alert.show();
+    public int getCapital() {
+        return capital;
     }
 
-
-
-
-
-
-
-
-
+    public void setCapital(int capital) {
+        this.capital = capital;
+    }
 }
